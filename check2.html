@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>发票查验</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script>
+      
+    </script>
+    <style>
+      body { padding-top: 70px; }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background:#0099ff;color:#ffffff;">
+      <div class="container">
+        
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">发票云查验</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#">登录</a></li>
+            <li><a href="#">注册</a></li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon">发票代码</span>
+        <input type="text" class="form-control" placeholder="请输入10或12位发票代码">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon">发票号码</span>
+        <input type="text" class="form-control" placeholder="请输入8位发票号码">
+      </div>
+      <br>
+      <button type="button" class="btn btn-warning">
+        <span class="glyphicon glyphicon-search"></span> 查询
+      </button>
+      <button type="button" class="btn btn-primary">
+        清空
+      </button>
+      <div class="table-responsive">
+        <table class="table">
+          <caption>查询列表</caption>
+          <thead>
+            <tr>
+              <th>发票信息</th>
+              <th>所属地区</th>
+              <th>查询次数</th>
+              <th>最后查询时间</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="active">
+              <td>产品1</td>
+              <td>北京</td>
+              <td>32</td>
+              <td>23/11/2013</td>
+              <td>待发货</td>
+              <td>
+                <div class="btn-group btn-group-xs">
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">查看</button>
+                  <button type="button" class="btn btn-default">清除</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="success">
+              <td>产品1</td>
+              <td>北京</td>
+              <td>32</td>
+              <td>23/11/2013</td>
+              <td>待发货</td>
+              <td>
+                <div class="btn-group btn-group-xs">
+                  <button type="button" class="btn btn-info" onclick="check();">查看</button>
+                  <button type="button" class="btn btn-default">清除</button>
+                </div>
+              </td>
+            </tr>
+            <tr  class="warning">
+              <td>产品1</td>
+              <td>北京</td>
+              <td>32</td>
+              <td>23/11/2013</td>
+              <td>待发货</td>
+              <td>
+                <div class="btn-group btn-group-xs">
+                  <button type="button" class="btn btn-info">查看</button>
+                  <button type="button" class="btn btn-default">清除</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">查看结果</h4>
+            </div>
+            <div class="modal-body">
+              <div class="list-group">
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">发票代码</h4>
+                  <p class="list-group-item-text">233001121133</p>
+                </a>
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">发票号码</h4>
+                  <p class="list-group-item-text">09768572</p>
+                </a>
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">是否出售</h4>
+                  <p class="list-group-item-text">已出售</p>
+                </a>
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">出售税务机关</h4>
+                  <p class="list-group-item-text">杭州市地方税务局</p>
+                </a>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">去税务局查询</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </body>
+</html>
