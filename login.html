@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户中心</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#tabLogin').click(function () {
+          $('#myTab').hide();
+          $('#login').show();
+        });
+        $('#tabRegister').click(function () {
+          $('#myTab').hide();
+          $('#register').show();
+        });
+        $('#tabBack').click(function () {
+          $('#login').hide();
+          $('#myTab').show();
+        });
+        $('#tabBack1').click(function () {
+          $('#register').hide();
+          $('#myTab').show();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="jumbotron" style="background-color:#0066ff">
+      <h1 style="color:#ffffff;text-align:center">财税管家</h1>
+      <h5 style="color:#ffffff;text-align:center">点亮智慧财税 尽享贴心服务</h5>
+      <br>
+      <div class="container">
+        <div id="myTab">
+          <button id="tabLogin" type="button" class="btn btn-primary  btn-block">登录</button>
+          <br>
+          <button id="tabRegister"type="button" class="btn btn-default  btn-block">注册</button>
+        </div>
+        <div id="login" style="display:none">
+          <button  id="tabBack" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span> 返回
+          </button>
+          <form class="form-horizontal" role="form">
+            <br>
+            <input type="email" class="form-control" name="inputEmail3" placeholder="管家账号">
+            <br>
+            <input type="password" class="form-control" name="inputPassword3" placeholder="密码">
+            <br>
+            <p>
+              <input type="text" class="form-control" name="inputPassword3" placeholder="验证码">
+              <img src="..." class="img-responsive" alt="Responsive image">
+            </p>
+            <br>
+            <button type="submit" class="btn btn-primary btn-block">登录</button>
+          </form>
+        </div>
+        <div id="register" style="display:none">
+          <button id="tabBack1" type="button" class="btn">返回</button>
+          <br>
+          <button  type="button" class="btn btn-primary  btn-block">注册</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
