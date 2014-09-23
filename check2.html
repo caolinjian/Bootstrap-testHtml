@@ -13,7 +13,15 @@
       
     </script>
     <style>
-      body { padding-top: 70px; }
+      body {
+        padding-top: 70px;
+      }
+      .zydes {
+        color: #666;
+        padding: 10px;
+        line-height: 23px;
+        clear: both;
+      }
     </style>
   </head>
   <body>
@@ -77,7 +85,7 @@
       <button type="button" class="btn btn-primary">
         清空
       </button>
-      <div class="table-responsive">
+      <div class="table-responsive" style="margin-top:10px">
         <table class="table">
           <caption>查询列表</caption>
           <thead>
@@ -87,6 +95,7 @@
               <th>查询次数</th>
               <th>最后查询时间</th>
               <th>状态</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -97,7 +106,7 @@
               <td>23/11/2013</td>
               <td>待发货</td>
               <td>
-                <div class="btn-group btn-group-xs">
+                <div class="btn-group btn-group-xs" style="min-width:75px">
                   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">查看</button>
                   <button type="button" class="btn btn-default">清除</button>
                 </div>
@@ -166,6 +175,15 @@
             </div>
           </div>
         </div>
+      </div>
+      <!-- 注意事项 -->
+      <div id="notice" class="zydes"> 
+        <hr>
+        <h5><b>注意事项</b></h5> 
+        1、本查询结果来源于各地税局系统，查询结果不作为鉴别异常、虚开、非法开具发票的法律依据。<br>
+        2、发票查询最终结果以当地主管税务机关的鉴定为准。如您怀疑您所查询的发票为假发票，请与当地税务机关联系或拨打举报电话：区号+12366。 
+        <br> 
+        3、部分地区税务机关代开发票可能存在滞后情况，敬请谅解。
       </div>
     </div><!-- /.container-fluid -->
   </body>
