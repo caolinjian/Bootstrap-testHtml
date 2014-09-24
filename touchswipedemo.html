@@ -9,10 +9,10 @@ $(function() {
 //swipe 的dome
 $()
 $("#test").swipe( {
-swipeLeft:function(event, direction, distance, duration, fingerCount) {
+swipe:function(event, direction, distance, duration, fingerCount) {
   $(this).text("你用"+fingerCount+"个手指以"+duration+"秒的速度向" + direction + "滑动了" +distance+ "像素 " );
 
-},
+},allowPageScroll:"vertical"
 });
 //swipeStatus的dome
 $("#test2").swipe( {
