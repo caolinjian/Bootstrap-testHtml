@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>某不科学的魔法禁书目录</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var storage = window.localStorage;
+      if(storage.getItem("m") == null){
+        storage.setItem("m","32642-2169070.html");
+      }
+      var prev = 0;
+      var mark = storage.getItem("m");
+      var next = 0;
+      function load(page){
+        storage.setItem("m",page);
+        var scriptBlock=document.createElement("script");
+        scriptBlock.src="http://urltodata.sinaapp.com/get.php?url=http://www.ailing.cc/bookreader/"+page;
+        scriptBlock.type = "text/javascript";scriptBlock.language = "javascript";scriptBlock.charset="GB2312";
+        document.getElementsByTagName("head")[0].appendChild(scriptBlock);
+        scriptBlock.onreadystatechange = scriptBlock.onload = function(){
+          var text = GP.data.value;
+          var title = text.substring(text.indexOf("【】")+2,text.indexOf("_爱玲书院"));
+          var s = text.substring(text.indexOf("id= content"));
+          var index = s.match(/32642-(\d+)\.html/g);
+          prev =  index[0];
+          next = index[1];
+          s = s.substr(11,s.indexOf("class= divimage")-15);
+          s = s.replace(/br/g,"<br>");
+          s = "<h2>"+title+"</h2>"+s;
+          document.getElementById('content').innerHTML=s;
+        }
+      }
+      function change(){
+        var value = document.getElementById('range').value ;
+        document.getElementById('test_size').style.fontSize = value+"px";
+        document.getElementById('content').style.fontSize = value+"px";
+      }
+      function change_font_color(){
+        var value = document.getElementById('favcolor').value ;
+        document.getElementById('content').style.color = value;
+      }
+      function change_font_color1(a){
+        var value = a.style.background ;
+        document.getElementById('content').style.color = value;
+      }
+      function change_background_color(){
+        var value = document.getElementById('favbackground').value ;
+        document.getElementById('content').style.backgroundColor = value;
+      }
+      function change_background_color1(a){
+        var value = a.style.background ;
+        document.getElementById('content').style.backgroundColor = value;
+      }
+    </script>
+    <style>
+      body {
+        padding-top: 70px;
+        padding-bottom:70px;
+      }
+      .nav-justified>li{
+        display: table-cell;
+        width: 1%;
+      }
+      .media, .media .media{
+        border: 1px solid #daf3ff;
+        margin-top: 0px;
+      }
+      h1, .h1, h2, .h2, h3, .h3{
+        margin-top: 0px;
+        text-align:center;
+      }
+      input[type=range] {
+        display: inline;
+        width: 40%;
+      }
+      :focus {
+        outline: -webkit-focus-ring-color auto 0px;
+      }
+      a:focus {
+        outline: -webkit-focus-ring-color auto 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="drop1" href="#" class="dropdown-toggle navbar-brand"" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            魔法禁书目录
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">还没啥好看的</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">还没啥好看的</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">还没啥好看的</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">哈哈哈</a></li>
+          </ul>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="搜索话题、问题或人">
+            </div>
+            <button type="submit" class="btn btn-info">提问</button>
+          </form>
+          <ul class="nav navbar-nav">
+            <li><a href="#" data-toggle="modal" data-target="#background_color">背景颜色</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#font_color">字体颜色</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#font_style">字体样式</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#font_size">字体大小</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">齐二</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">我的主页</a></li>
+                <li><a href="#">私信</a></li>
+                <li><a href="#">设置</a></li>
+                <li class="divider"></li>
+                <li><a href="#">退出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="modal fade bs-example-modal-sm" id="font_size" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">字体大小</h4>
+          </div>
+          <div class="modal-body">
+            <input type="range" id="range" min="12" max="28" step="2" value="12" onchange="change()"/>
+            <text id="test_size" style="font-size:12px">字体大小<text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="font_style" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">字体样式</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="font_color" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">字体颜色</h4>
+          </div>
+          <div class="modal-body">
+            <div class="btn-group" style="TEXT-ALIGN: center;margin-left: auto; margin-right: auto;width:100%;">
+              <button type="button" class="btn btn-default" style="background: #3333FF" onclick="change_font_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #ff6600" onclick="change_font_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #009900" onclick="change_font_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #e000d8" onclick="change_font_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #000000" onclick="change_font_color1(this)"> </button>
+            </div>
+            <div class="input-group" style="margin-top:10px;">
+              <span class="input-group-addon">自定义</span>
+              <input type="color"  class="form-control" id="favcolor" value="" onchange="change_font_color()">
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="background_color" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">背景颜色</h4>
+          </div>
+          <div class="modal-body">
+            <div class="btn-group" style="TEXT-ALIGN: center;margin-left: auto; margin-right: auto;width:100%;">
+              <button type="button" class="btn btn-default" style="background: #CD352C" onclick="change_background_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #FFF99D" onclick="change_background_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #82B857" onclick="change_background_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #DC9AD6" onclick="change_background_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #eee" onclick="change_background_color1(this)"> </button>
+              <button type="button" class="btn btn-default" style="background: #59E2FF" onclick="change_background_color1(this)"> </button>
+            </div>
+            <div class="input-group" style="margin-top:10px;">
+              <span class="input-group-addon">自定义</span>
+              <input type="color"  class="form-control" id="favbackground" value="" onchange="change_background_color()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+      <div class="container">
+        
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <ul class="nav nav-pills nav-justified" role="tablist">
+
+          <li><a href="#">首页</a></li>
+          <li><a href="#" onclick="javascript:load(prev);return false;">上页</a></li>
+          <li><a href="#" onclick="javascript:load(next);return false;">下页</a></li>
+          <li><a href="#">更多</a></li>
+          </ul>
+      </div>
+    </nav>
+    <div class="container" id="content">
+    加载中...
+    </div>
+  </body>
+  <script>
+    load(mark);
+  </script>
+</html>
