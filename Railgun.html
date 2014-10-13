@@ -13,8 +13,20 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
       var storage = window.localStorage;
+      if(storage.getItem("scrollTop") == null){
+        storage.setItem("scrollTop","0");
+      }
       if(storage.getItem("m") == null){
         storage.setItem("m","32642-2169070.html");
+      }
+      if(storage.getItem("size") == null){
+        storage.setItem("size","16px");
+      }
+      if(storage.getItem("color") == null){
+        storage.setItem("color","#333");
+      }
+      if(storage.getItem("backgroundColor") == null){
+        storage.setItem("backgroundColor","#fff");
       }
       var prev = 0;
       var mark = storage.getItem("m");
@@ -35,35 +47,51 @@
           s = s.substr(11,s.indexOf("class= divimage")-15);
           s = s.replace(/br/g,"<br>");
           s = "<h2>"+title+"</h2><p>"+s+"</p>";
+          document.getElementById('content').style.fontSize = storage.getItem("size");
+          document.getElementById('content').style.color = storage.getItem("color");
+          document.getElementById('content').style.backgroundColor = storage.getItem("backgroundColor");
           document.getElementById('content').innerHTML=s;
+          $('body,html').animate({scrollTop:storage.getItem("scrollTop")},1000);
         }
       }
       function change_font(a){
         var value = a.style.fontFamily ;
         document.getElementById('content').style.fontFamily = value;
-        $('#font_style').modal('hide')
+        $('#font_style').modal('hide');
       }
       function change_font_size(a){
         var value = a.style.fontSize ;
         document.getElementById('content').style.fontSize = value;
-        $('#font_size').modal('hide')
+        storage.setItem("size",value);
+        $('#font_size').modal('hide');
       }
       function change_font_color(){
         var value = document.getElementById('favcolor').value ;
         document.getElementById('content').style.color = value;
+        storage.setItem("color",value);
       }
       function change_font_color1(a){
         var value = a.style.background ;
         document.getElementById('content').style.color = value;
+        storage.setItem("color",value);
       }
       function change_background_color(){
         var value = document.getElementById('favbackground').value ;
         document.getElementById('content').style.backgroundColor = value;
+        storage.setItem("backgroundColor",value);
       }
       function change_background_color1(a){
         var value = a.style.background ;
         document.getElementById('content').style.backgroundColor = value;
+        storage.setItem("backgroundColor",value);
       }
+      $(document).ready(function(){
+        $(window).scroll(function(){
+          if ($(window).scrollTop()>100){
+            storage.setItem("scrollTop",$(window).scrollTop());
+          }
+        });
+      });
     </script>
     <style>
       body {
@@ -126,14 +154,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="搜索话题、问题或人">
+              <input type="text" class="form-control" placeholder="搜索...">
             </div>
-            <button type="submit" class="btn btn-info">提问</button>
+            <button type="submit" class="btn btn-info">Hi~ o(*￣▽￣*)ブ</button>
           </form>
           <ul class="nav navbar-nav">
             <li><a href="#" data-toggle="modal" data-target="#background_color">背景颜色</a></li>
             <li><a href="#" data-toggle="modal" data-target="#font_color">字体颜色</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#font_style">字体样式</a></li>
             <li><a href="#" data-toggle="modal" data-target="#font_size">字体大小</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
