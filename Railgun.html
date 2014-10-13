@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>某不科学的魔法禁书目录</title>
+    <link rel="fluid-icon" href="images/fluidicon.png" title="炮姐">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -35,10 +38,15 @@
           document.getElementById('content').innerHTML=s;
         }
       }
-      function change(){
-        var value = document.getElementById('range').value ;
-        document.getElementById('test_size').style.fontSize = value+"px";
-        document.getElementById('content').style.fontSize = value+"px";
+      function change_font(a){
+        var value = a.style.fontFamily ;
+        document.getElementById('content').style.fontFamily = value;
+        $('#font_style').modal('hide')
+      }
+      function change_font_size(a){
+        var value = a.style.fontSize ;
+        document.getElementById('content').style.fontSize = value;
+        $('#font_size').modal('hide')
       }
       function change_font_color(){
         var value = document.getElementById('favcolor').value ;
@@ -84,6 +92,10 @@
       a:focus {
         outline: -webkit-focus-ring-color auto 0px;
       }
+      @font-face { 
+        font-family:FZMWFont; 
+        src:url("fonts/FZMWFont.ttf"); 
+      } 
     </style>
   </head>
   <body>
@@ -147,8 +159,13 @@
             <h4 class="modal-title" id="myModalLabel">字体大小</h4>
           </div>
           <div class="modal-body">
-            <input type="range" id="range" min="12" max="28" step="2" value="12" onchange="change()"/>
-            <text id="test_size" style="font-size:12px">字体大小<text>
+            <p style="font-size:12px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:14px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:16px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:18px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:20px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:22px" onclick="change_font_size(this)">字体大小</p>
+            <p style="font-size:24px" onclick="change_font_size(this)">字体大小</p>
           </div>
         </div>
       </div>
@@ -161,7 +178,8 @@
             <h4 class="modal-title" id="myModalLabel">字体样式</h4>
           </div>
           <div class="modal-body">
-            
+            <p style="font-size:16px;" onclick="change_font(this)">默认样式</p>
+            <p style="font-size:16px;font-family:FZMWFont;" onclick="change_font(this)">方正喵呜体</p>
           </div>
         </div>
       </div>
@@ -227,7 +245,7 @@
           </ul>
       </div>
     </nav>
-    <div class="container" id="content" width="100%" style="overflow-y:auto;">
+    <div class="container" id="content" width="100%" style="word-wrap:break-word;">
     加载中...
     </div>
   </body>
