@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -32,7 +31,7 @@
           next = index[1];
           s = s.substr(11,s.indexOf("class= divimage")-15);
           s = s.replace(/br/g,"<br>");
-          s = "<h2>"+title+"</h2>"+s;
+          s = "<h2>"+title+"</h2><p>"+s+"</p>";
           document.getElementById('content').innerHTML=s;
         }
       }
@@ -60,8 +59,9 @@
     </script>
     <style>
       body {
-        padding-top: 70px;
-        padding-bottom:70px;
+        padding-top: 50px;
+        padding-bottom:50px;
+        overflow-y:hidden; 
       }
       .nav-justified>li{
         display: table-cell;
@@ -175,7 +175,7 @@
             <h4 class="modal-title" id="myModalLabel">字体颜色</h4>
           </div>
           <div class="modal-body">
-            <div class="btn-group" style="TEXT-ALIGN: center;margin-left: auto; margin-right: auto;width:100%;">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" style="background: #3333FF" onclick="change_font_color1(this)"> </button>
               <button type="button" class="btn btn-default" style="background: #ff6600" onclick="change_font_color1(this)"> </button>
               <button type="button" class="btn btn-default" style="background: #009900" onclick="change_font_color1(this)"> </button>
@@ -199,7 +199,7 @@
             <h4 class="modal-title" id="myModalLabel">背景颜色</h4>
           </div>
           <div class="modal-body">
-            <div class="btn-group" style="TEXT-ALIGN: center;margin-left: auto; margin-right: auto;width:100%;">
+            <div class="btn-group">
               <button type="button" class="btn btn-default" style="background: #CD352C" onclick="change_background_color1(this)"> </button>
               <button type="button" class="btn btn-default" style="background: #FFF99D" onclick="change_background_color1(this)"> </button>
               <button type="button" class="btn btn-default" style="background: #82B857" onclick="change_background_color1(this)"> </button>
@@ -229,7 +229,7 @@
           </ul>
       </div>
     </nav>
-    <div class="container" id="content">
+    <div class="container" id="content" width="100%">
     加载中...
     </div>
   </body>
