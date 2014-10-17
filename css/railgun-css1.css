@@ -1,0 +1,40 @@
+﻿body {
+  padding-top: 50px;
+  padding-bottom:50px;
+}
+.nav-justified>li{
+  display: table-cell;
+  width: 1%;
+}
+.media, .media .media{
+  border: 1px solid #daf3ff;
+  margin-top: 0px;
+}
+h1, .h1, h2, .h2, h3, .h3{
+  margin-top: 10px;
+  text-align:center;
+}
+h3{
+  font-size:16px;
+  font-weight:normal;
+}
+input[type=range] {
+  display: inline;
+  width: 40%;
+}
+:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+a:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+@font-face { 
+  font-family:FZMWFont; 
+  src:url("fonts/FZMWFont.ttf"); 
+}
+.nav-justified>li>a {
+  margin-bottom: 0px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
