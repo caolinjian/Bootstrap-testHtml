@@ -45,8 +45,25 @@
           var index = s.match(/32642-(\d+)\.html/g);
           prev =  index[0];
           next = index[1];
-          s = s.substr(11,s.indexOf("class= divimage")-15);
+          if(s.indexOf("class= divimage") > 0){
+            s = s.substr(11,s.indexOf("class= divimage")-15);
+          }else{
+            s = s.substr(11,s.indexOf("id= footlink")-22);
+          }
           s = s.replace(/br/g,"<br>");
+          if(s.length < 10){
+            s = "<div class=\"alert alert-danger\" role=\"alert\">该页无文字内容</div>"+
+                "<div class=\"spinner1\">"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div>"+
+                "<div class=\"cube\"></div></div>";
+          }
           s = "<h2>"+title+"</h2><p>"+s+"</p>";
           document.getElementById('content').style.fontSize = storage.getItem("size");
           document.getElementById('content').style.color = storage.getItem("color");
@@ -57,23 +74,47 @@
       }
       function portal(){
         var scriptBlock=document.createElement("script");
-        scriptBlock.src="http://urltodata.sinaapp.com/get.php?url=http://www.ailing.cc/bookreader/"+page;
+        scriptBlock.src="http://urltodata.sinaapp.com/get.php?url=http://www.ailing.cc/list/32642.html";
         scriptBlock.type = "text/javascript";scriptBlock.language = "javascript";scriptBlock.charset="GB2312";
         document.getElementsByTagName("head")[0].appendChild(scriptBlock);
         scriptBlock.onreadystatechange = scriptBlock.onload = function(){
           var text = GP.data.value;
-          var title = text.substring(text.indexOf("【】")+2,text.indexOf("_爱玲书院"));
-          var s = text.substring(text.indexOf("id= content"));
-          var index = s.match(/32642-(\d+)\.html/g);
-          prev =  index[0];
-          next = index[1];
-          s = s.substr(11,s.indexOf("class= divimage")-15);
-          s = s.replace(/br/g,"<br>");
-          s = "<h2>"+title+"</h2><p>"+s+"</p>";
+          var s = text.match(/24px(\s+)(\W+)\s+h1/g);
+          var s2 = text.match(/info(.+)div/g);
+          var book = s[0].substring(5,s[0].indexOf("h1"));
+          var author = s2[0].substring(5,s2[0].indexOf("div"));
+          var mainArea = "<h2>"+book+"</h2><h3>"+author+"</h3>";
+          mainArea += "<div class=\"panel-group\" id=\"accordion\" role=\"tablist\" aria-multiselectable=\"true\">";
+          var mainIndex = text.match(/【】(\s+)((\S+)|(\S+\s+\S+))(\s+)td/g);
+          var mainHref = text.split("【】");
+          for(var i=0;i<mainIndex.length;i++){
+            var flag = "false";
+            var flag2 = "collapse"
+            if(i==0){
+              flag = "true";
+              flag2 = "collapse in"
+            }
+            mainArea += "<div class=\"panel panel-default\">"+
+                        "<div class=\"panel-heading\">"+
+                        "<h4 class=\"panel-title\">"+
+                        "<center data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse"+i+"\" aria-expanded=\""+flag+"\" aria-controls=\"collapse"+i+"\">"+
+                        mainIndex[i].substring(0,mainIndex[i].indexOf("td"))+
+                        "</center></h4></div>"+
+                        "<div id=\"collapse"+i+"\" class=\"panel-collapse "+flag2+"\" role=\"tabpanel\">"+
+                        "<div class=\"panel-body\">";
+            var hrefIndex = mainHref[i+1].match(/(\d+)-(\d+)\.html/g);
+            for(var j=0;j<hrefIndex.length;j++){
+              mainArea += "<div   onclick=\"javascript:load(\'"+hrefIndex[j]+"\',true);return false;\">"+j+"</div>";
+              
+            }
+            mainArea +="</div></div></div>";
+                        
+          }
+          mainArea += "</div>"
           document.getElementById('content').style.fontSize = storage.getItem("size");
           document.getElementById('content').style.color = storage.getItem("color");
           document.getElementById('content').style.backgroundColor = storage.getItem("backgroundColor");
-          document.getElementById('content').innerHTML=s;
+          document.getElementById('content').innerHTML=mainArea;
           $('body,html').animate({scrollTop:0},1000);
         }
       }
@@ -138,6 +179,10 @@
       h1, .h1, h2, .h2, h3, .h3{
         margin-top: 10px;
         text-align:center;
+      }
+      h3{
+        font-size:16px;
+        font-weight:normal;
       }
       input[type=range] {
         display: inline;
@@ -208,6 +253,49 @@
       }
     }
     </style>
+    <style>
+    .spinner1 {
+      width:150px;
+      height:150px;
+      margin:100px auto;
+    }
+
+    .cube {
+      width:33%;
+      height:33%;
+      background:#1289ab;
+      float:left;
+      -webkit-animation: scaleDelay 1.3s infinite ease-in-out;
+      animation: scaleDelay 1.3s infinite ease-in-out;
+    }
+
+    /* 
+     * Spinner1 positions
+     * 1 2 3 
+     * 4 5 6
+     * 7 8 9
+     */
+
+    .spinner1 .cube:nth-child(1) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }
+    .spinner1 .cube:nth-child(2) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }
+    .spinner1 .cube:nth-child(3) { -webkit-animation-delay: 0.4s; animation-delay: 0.4s  }
+    .spinner1 .cube:nth-child(4) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }
+    .spinner1 .cube:nth-child(5) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }
+    .spinner1 .cube:nth-child(6) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }
+    .spinner1 .cube:nth-child(7) { -webkit-animation-delay: 0.0s; animation-delay: 0.0s  }
+    .spinner1 .cube:nth-child(8) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }
+    .spinner1 .cube:nth-child(9) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }
+        
+    @-webkit-keyframes scaleDelay {
+      0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0) }
+      35%           { -webkit-transform:scale3D(0.0, 0.0, 1.0) }
+    }
+        
+    @keyframes scaleDelay {
+      0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(1.0, 1.0, 1.0) }
+      35%           { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(0.0, 0.0, 1.0) }
+    }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -230,7 +318,7 @@
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">还没啥好看的</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">还没啥好看的</a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="javascript:alert('别瞎点，这些暂时没用╮(￣▽￣")╭ ');return false;">哈哈哈</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick='javascript:alert("别瞎点，这些暂时没用╮(￣▽￣\")╭ ");return false;'>哈哈哈</a></li>
           </ul>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -371,6 +459,9 @@
     }else{
       var mark = storage.getItem("m");
     }
+    $(function() {
+        $("#more").popover();
+    })
     load(mark,false);
   </script>
 </html>
