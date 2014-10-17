@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>列表</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+     $(function() {
+         $('.tooltip-demo').tooltip({
+          selector: "[data-toggle=tooltip]",
+          container: "body"
+        })
+        $("#testt").tooltip({})
+        $('a').tooltip()
+    })
+    </script>
+  </head>
+  <body>
+    <div class="container" style="margin-top:40px;">
+      <div class="bs-example tooltip-demo">
+        <div class="bs-example-tooltips">
+          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">左侧Tooltip</button>
+          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">上方Tooltip</button>
+          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">下方Tooltip</button>
+          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">右侧Tooltip</button>
+        </div>
+      </div>
+      <input type="text" id="testt" rel="tooltip" title="123456" />
+      <a href="#" data-toggle="tooltip" title="Default tooltip" >dsafsdfasdfasdfasd</a>
+    </div>
+  </body>
+</html>

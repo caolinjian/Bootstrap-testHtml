@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>列表</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    $(function() {
+        $("#a2").popover();
+        $("[data-toggle=popover]").popover();
+        })
+    </script>
+  </head>
+  <body>
+      <a id="a2" class="btn btn-lg btn-danger" data-placement="right" data-content="即对拥有矮、胖、穷、丑、矬、呆、撸等属性特征的各种雷人行径及想法表示轻蔑。屌丝（或写作“吊丝”）可以说是由骂人话“屌死”、“吊死”、“叼死”演变而来。“屌丝男”主要是指大多出身清贫之家，如乡村或许多城市底层小市民家庭，没有更多的背景，许多初中即停学，进城务工，或成了餐厅服务员，或成了网吧网管，在城市的富贵之中分得一杯苦羹；或是宅男、无业游民，可是通常又不肯承认，个人一般自称为自由职业者。" title=""  href="#" data-original-title="屌丝本义">
+           Please Click to toggle popover
+        </a>
+        <div  style="margin-left:200px;margin-top:100px;margin-bottom:200px;" class="bs-example tooltip-demo">
+      <div  class="bs-example-tooltips">
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          左侧弹框
+        </button>
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          上方弹框
+        </button>
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          下方弹框
+        </button>
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          右侧弹框
+        </button>
+      </div>
+      <img src="images/loading.gif">
+    </div>
+  </body>
+</html>
