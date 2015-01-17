@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>算24点</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container" id="content" width="100%" style="word-wrap:break-word;">
+      <h1>算24点</h1>
+      输入4个数(1~9之间，用英文隔开)：<input id="num" type="text">
+      <br>
+      <button  type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" onclick="point24()">查看算式</button>
+    </div>
+    <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">算24点</h4>
+          </div>
+          <div class="modal-body" id="showDiv" style="font-weight:normal">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      var main = "";
+      function newArray(number,arr,i,j,str){
+        var a = [];
+        for(var m = 0;m<arr.length;m++){
+          if(m == i || m == j){
+            continue;
+          }
+          a.push(arr[m]);
+        }
+        a.push(number);
+        if(arr.loop){
+          for(var n = 1;n<arr.loop+1;n++){
+            a["math"+n] = arr["math"+n];
+          }
+          a["math"+(arr.loop+1)] = str;
+          a.loop = arr.loop + 1;
+        }else{
+          a.loop = 1;
+          a["math"+1] = str;
+        }
+        return a;
+      }
+      function magic(arr){
+        if(arr.length < 2 && arr[0] == 24){
+          if(arr.loop){
+            for(var n = 1;n<arr.loop+1;n++){
+              main += arr["math"+n]+"<br>";
+            }
+            main += "<hr>";
+          }
+          return;
+        }
+        top1:
+        for(var i = 0;i<arr.length-1;i++){
+          for(var ii = 0;ii<i;ii++){
+            if(arr[ii] == arr[i]){
+              continue top1;
+            }
+          }
+          top2:
+          for(var j = i+1;j<arr.length;j++){
+            for(var jj = i+1;jj<j;jj++){
+              if(arr[jj] == arr[j]){
+                continue top2;
+              }
+            }
+            for(var math = 0;math<6;math++){
+              if(math == 0){
+                var number = arr[i]+arr[j];
+                var str = arr[i]+"+"+arr[j]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }else if(math == 1){
+                var number = arr[i]-arr[j];
+                var str = arr[i]+"-"+arr[j]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }else if(math == 2){
+                if(arr[j] == arr[i]){
+                  continue;
+                }
+                var number = arr[j]-arr[i];
+                var str = arr[j]+"-"+arr[i]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }else if(math == 3){
+                var number = arr[j]*arr[i];
+                var str = arr[i]+"*"+arr[j]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }else if(math == 4){
+                var number = arr[j]/arr[i];
+                if(number == Infinity || number == -Infinity){
+                  continue;
+                }
+                var str = arr[j]+"/"+arr[i]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }else{
+                if(arr[j] == arr[i]){
+                  continue;
+                }
+                var number = arr[i]/arr[j];
+                if(number == Infinity || number == -Infinity){
+                  continue;
+                }
+                var str = arr[i]+"/"+arr[j]+"="+number;
+                var a = newArray(number,arr,i,j,str);
+                magic(a);
+              }
+            }
+          }
+        }
+      }
+      function point24(){
+        var start = performance.now();
+        var txt = document.getElementById("num").value;
+        txt = txt.split(",");
+        txt = txt.map(function(elem, index, arr){
+          return Number(elem);
+        });
+        main = "";
+        if(txt[0] == NaN){
+          alert("请正确输入数组！");
+        }else{
+          magic(txt);
+        }
+        if(main == ""){
+          main = "无解!"
+        }
+        document.getElementById("myModalLabel").innerHTML = txt;
+        document.getElementById("showDiv").innerHTML = main;
+        var end = performance.now();
+        console.log('耗时：' + (end - start) + '微秒。');
+      }
+    </script>
+  </body>
+</html>

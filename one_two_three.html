@@ -1,0 +1,151 @@
+﻿<html>
+<head>
+<script>
+var main = "";
+function newArray(number,arr,i,j,str){
+  var a = [];
+  for(var m = 0;m<arr.length;m++){
+    if(m == i || m == j){
+      continue;
+    }
+    a.push(arr[m]);
+  }
+  a.push(number);
+  if(arr.loop){
+    for(var n = 1;n<arr.loop+1;n++){
+      a["math"+n] = arr["math"+n];
+    }
+    a["math"+(arr.loop+1)] = str;
+    a.loop = arr.loop + 1;
+  }else{
+    a.loop = 1;
+    a["math"+1] = str;
+  }
+  return a;
+}
+function magic(arr,resu){
+  if(arr.length < 2 && arr[0] == resu){
+    if(arr.loop){
+      for(var n = 1;n<arr.loop+1;n++){
+        main += arr["math"+n]+"<br>";
+      }
+      main += "<hr>";
+    }
+    return;
+  }
+  top1:
+  for(var i = 0;i<arr.length-1;i++){
+    for(var ii = 0;ii<i;ii++){
+      if(arr[ii] == arr[i]){
+        continue top1;
+      }
+    }
+    top2:
+    for(var j = i+1;j<arr.length;j++){
+      for(var jj = i+1;jj<j;jj++){
+        if(arr[jj] == arr[j]){
+          continue top2;
+        }
+      }
+      for(var math = 0;math<6;math++){
+        if(math == 0){
+          var number = arr[i]+arr[j];
+          var str = arr[i]+"+"+arr[j]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }else if(math == 1){
+          var number = arr[i]-arr[j];
+          var str = arr[i]+"-"+arr[j]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }else if(math == 2){
+          if(arr[j] == arr[i]){
+            continue;
+          }
+          var number = arr[j]-arr[i];
+          var str = arr[j]+"-"+arr[i]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }else if(math == 3){
+          var number = arr[j]*arr[i];
+          var str = arr[i]+"*"+arr[j]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }else if(math == 4){
+          var number = arr[j]/arr[i];
+          if(number == Infinity || number == -Infinity){
+            continue;
+          }
+          var str = arr[j]+"/"+arr[i]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }else{
+          if(arr[j] == arr[i]){
+            continue;
+          }
+          var number = arr[i]/arr[j];
+          if(number == Infinity || number == -Infinity){
+            continue;
+          }
+          var str = arr[i]+"/"+arr[j]+"="+number;
+          var a = newArray(number,arr,i,j,str);
+          magic(a,resu);
+        }
+      }
+    }
+  }
+}
+function point24(){
+  var start = performance.now();
+  var txt = document.getElementById("num").value;
+  txt = txt.split(",");
+  txt = txt.map(function(elem, index, arr){
+    return Number(elem);
+  });
+  main = "<h2>"+txt+"</h2>";
+  if(txt[0] == NaN){
+    alert("请正确输入数组！");
+  }else{
+    magic(txt,24);
+  }
+  document.getElementById("showDiv").innerHTML = main;
+  var end = performance.now();
+  console.log('耗时：' + (end - start) + '微秒。');
+}
+function magic321(){
+  var start = performance.now();
+  var max = document.getElementById("max").value;
+  var arr = [];
+  for(var i = 1;i<Number(max)+1;i++){
+    arr.push(i);
+  }
+  var result = document.getElementById("result").value;
+  result = Number(result);
+  main = "<h2>"+arr+"求:"+result+"</h2>";
+  magic(arr,result);
+  document.getElementById("showDiv").innerHTML = main;
+  var end = performance.now();
+  console.log('耗时：' + (end - start) + '微秒。');
+}
+</script>
+</head>
+<body>
+<article>
+<h1>1到n计算某数</h1>
+输入数组个数：<input id="max" type="number" min="2" max="10">
+<br>
+需要得到结果：<input id="result" type="number">
+<br>
+<button onclick="magic321()">查看算式</button>
+</article>
+<article>
+<h1>算24点</h1>
+输入4个数(1~9之间，用英文隔开)：<input id="num" type="text">
+<br>
+<button onclick="point24()">查看算式</button>
+</article>
+<article id="showDiv" style="font-weight:normal">
+
+</article>
+</body>
+</html>
