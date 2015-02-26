@@ -20,7 +20,6 @@ function load(page,flag){
   }
   storage.setItem("m",page);
   var scriptBlock=document.createElement("script");
-  alert(page)
   scriptBlock.src="http://urltodata.sinaapp.com/get.php?url=http://www.ailing.cc/bookreader/"+page;
   scriptBlock.type = "text/javascript";scriptBlock.language = "javascript";scriptBlock.charset="GB2312";
   document.getElementsByTagName("head")[0].appendChild(scriptBlock);
@@ -147,4 +146,14 @@ $(document).ready(function(){
     }
   });
 });
+var mark = '32642-2169026.html'
+if(storage.getItem("m") == null){
+  portal();
+}else{
+  mark = storage.getItem("m");
+}
+$(function() {
+    $("#more").popover();
+})
+load(mark,false);
       
