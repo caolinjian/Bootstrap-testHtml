@@ -1,4 +1,4 @@
-﻿var storage = window.localStorage;
+var storage = window.localStorage;
 if(storage.getItem("scrollTop") == null){
   storage.setItem("scrollTop","0");
 }
@@ -13,7 +13,6 @@ if(storage.getItem("backgroundColor") == null){
   storage.setItem("backgroundColor","#fff");
 }
 var prev = 0;
-
 var next = 0;
 function load(page,flag){
   if(flag){

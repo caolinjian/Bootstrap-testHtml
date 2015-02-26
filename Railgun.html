@@ -179,6 +179,32 @@
       })
       load(mark,false);
     </script>
+    <script>
+  var clickCount = 0, $i=$('<b>');
+    $i.css({
+    'z-index':99999,
+    'position':'absolute',
+    'color':'red',
+    'display':'none'
+    });
+    $('body').append($i);
+    $(document).on('click',function(e){
+    var x = e.pageX, y = e.pageY;
+    $i.text('+'+(++clickCount)).css({
+    'display':'block',
+    'top':y-15,
+    'left':x,
+    'opacity':1
+
+    }).stop(true,false).animate({
+    'top':y-180,
+    'opacity':0
+    },800,function(){
+    $i.hide();
+    });
+    e.stopPropagation();
+    })
+  </script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   </body>
   
