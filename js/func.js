@@ -20,6 +20,7 @@ function load(page,flag){
   }
   storage.setItem("m",page);
   var scriptBlock=document.createElement("script");
+  alert(page)
   scriptBlock.src="http://urltodata.sinaapp.com/get.php?url=http://www.ailing.cc/bookreader/"+page;
   scriptBlock.type = "text/javascript";scriptBlock.language = "javascript";scriptBlock.charset="GB2312";
   document.getElementsByTagName("head")[0].appendChild(scriptBlock);
